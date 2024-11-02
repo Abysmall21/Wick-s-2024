@@ -22,7 +22,8 @@ public class CamController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CamPos = Pawns.gameObject.transform.position;
+        gameObject.transform.position = CamPos;
     }
     void LockedOn()
     {
