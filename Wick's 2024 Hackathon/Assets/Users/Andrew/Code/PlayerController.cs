@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed;
 
-    private Vector3 moveDir = Vector3.zero;
+    private Vector3 moveInput = Vector3.zero;
 
     public InputActionReference move;
+
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +26,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveDir = move.action.ReadValue<Vector2>();
+        moveInput = move.action.ReadValue<Vector2>();
     }
     private void FixedUpdate()
     {
-        rb.velocity = new Vector3(moveDir.x * moveSpeed, 0, moveDir.y * moveSpeed);
+        Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.y);
+
+
+        rb.velocity = new Vector3(moveInput.x * moveSpeed, 0, moveInput.y * moveSpeed);
+        transform.rotation = Quaternion.LookRotation(moveDir);
+
+
     }
     private void OnEnable()
     {
